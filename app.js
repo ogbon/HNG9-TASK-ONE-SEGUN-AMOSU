@@ -11,28 +11,24 @@ app.post('/arithmetic', (req, res) => {
   const { operation_type, x, y } = req.body
 
   let result = 0
-  let operationTypeValue = "Not Available"
-  if ((operation_type.addition !== 'addition') && (operation_type.substraction !== 'subtraction')
-    && (operation_type.multiplication !== 'multiplication')) {
-    operationTypeValue = "Not Available"
-      result = null
+  if ((operation_type !== 'addition') && (operation_type !== 'subtraction')
+    && (operation_type !== 'multiplication')) {
+    operation_type = "Not Available"
+
   }
-  if (operation_type.addition === 'addition') {
-    operationTypeValue = operation_type.addition
+  if (operation_type === 'addition') {
     result = Number.parseInt(x) + Number.parseInt(y)
   }
-  if (operation_type.subtraction === 'subtraction') {
-    operationTypeValue = operation_type.subtraction
+  if (operation_type === 'subtraction') {
     result = Number.parseInt(x) - Number.parseInt(y)
   }
-  if (operation_type.multiplication === 'multiplication') {
-    operationTypeValue = operation_type.multiplication
+  if (operation_type === 'multiplication') {
     result = Number.parseInt(x) * Number.parseInt(y)
   }
-  res.status(201).send({
+  res.status(200).send({
     slackUsername: 'segun-amosu',
     result,
-    operation_type: operationTypeValue
+    operation_type
   })
 })
 
